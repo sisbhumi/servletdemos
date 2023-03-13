@@ -29,13 +29,14 @@ public class AdditionServlet extends GenericServlet {
 					int num1 = Integer.parseInt(number1);
 					int num2 = Integer.parseInt(number2);
 					result = num1+num2;
+					out.println("<p>Result = " + (result) + "</p>");
 			}
 			catch(NumberFormatException e) {
 				out.println("<p>Invalid Input<p>");
 				
 			}
 		}
-		out.println("<p>Result = " + (result) + "</p>");
+		
 		
 	}
 

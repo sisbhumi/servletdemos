@@ -1,0 +1,6 @@
+use mydb;
+create table account( accno int, lastname varchar(25),firstname varchar(25), bal int);
+insert into account values(1,"chary","james", 1000);
+insert into account values(2,"minati","carry", 1000);
+insert into account values(3,"Din","mark", 1000);
+select * from account;
