@@ -13,12 +13,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/addUserServlet")
-public class addUserServlet extends HttpServlet {
-	
+@WebServlet("/updateUserServlet")
+public class updateUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Connection connection;
-    public addUserServlet() {
+    public updateUserServlet() {
         super();
     }
     
@@ -27,10 +26,9 @@ public class addUserServlet extends HttpServlet {
     		try {
 				Class.forName("com.mysql.jdbc.Driver");
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			connection = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root" , "root");
+			connection = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "root");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -38,34 +36,31 @@ public class addUserServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String firstName = request.getParameter("firstName");
-		String lastName = request.getParameter("lastName");
-		String emailId = request.getParameter("emailId");
+		
+		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-				
-		try(Statement statement = connection.createStatement();
-				) {
-				
-				int result = statement.executeUpdate("insert into user values ('"+firstName+"','"+lastName+"','"+emailId+"','"+password+"')" );	
-				PrintWriter out = response.getWriter();
-				if( result > 0)
-					out.println("<h1>User created in DB<h1>");
-				else
-					out.println("<h1>Error creating user<h1>");
-				
-		}catch (SQLException e) {
-				e.printStackTrace();
-		}		
-	}
+		
+		try(Statement statement = connection.createStatement();){
+			
+			int result = statement.executeUpdate("Update user set password = '"+password+"'   where email = '"+email+"';");
+			PrintWriter out = response.getWriter();
+			if(result != 0) {
+				out.println("Updated successfully");
+			}
+			else
+				out.println("Not updated");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	} 
 	
 	public void destroy() {
-		try {
-			if(connection != null) {
+		
+			try {
+				if( connection != null) 
 					connection.close();
-			} 
-		}catch (SQLException e) {
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		}
+	}
 }
-
