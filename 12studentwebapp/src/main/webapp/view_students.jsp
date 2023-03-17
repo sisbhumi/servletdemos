@@ -18,10 +18,11 @@
 		</tr>
 		<c:forEach var="student" items="${student_list}">
 			<tr>
-				<th>${student.id}</th>
-				<th>${student.firstName}</th>
-				<th>${student.lastName}</th>
-				<th>${student.email}</th>
+				<td>${student.id}</td>
+				<td>${student.firstName}</td>
+				<td>${student.lastName}</td>
+				<td>${student.email}</td>
+				<td><a href="deletestudent?studentId=${student.id}">Delete</a></td>
 			</tr>
 		</c:forEach>
 	</table>

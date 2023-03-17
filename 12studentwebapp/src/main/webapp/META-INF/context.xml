@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context>
+ <Resource name="jdbc/studentweb"
+  auth="Container"
+  type="javax.sql.DataSource"
+  maxActive="20" maxIdle="5" maxWait="10000"
+  username="root" password="rootroot"
+  driverClassName="com.mysql.cj.jdbc.Driver"
+  url="jdbc:mysql://localhost:3306/studentweb?useSSL=false&amp;serverTimezone=UTC" />
+</Context>
