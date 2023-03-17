@@ -11,20 +11,12 @@
   </welcome-file-list>
   
   <servlet>
-  	<servlet-name>HelloServlet</servlet-name>
-  	<servlet-class>com.servlets.HelloWorldServlet</servlet-class>
+  	<servlet-name>LoginServlet</servlet-name>
+  	<servlet-class>com.servlets.LoginServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>HelloServlet</servlet-name>
-  	<url-pattern>/hello</url-pattern>
+  	<servlet-name>LoginServlet</servlet-name>
+  	<url-pattern>/login</url-pattern>
   </servlet-mapping>
-  
-  <servlet>
-  	<servlet-name>additionServlet</servlet-name>
-  	<servlet-class>com.servlets.AdditionServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>additionServlet</servlet-name>
-  	<url-pattern>/add</url-pattern>
-  </servlet-mapping>
+
 </web-app>

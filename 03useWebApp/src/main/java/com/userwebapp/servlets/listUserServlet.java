@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,10 +21,15 @@ public class listUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	Connection con;
-	public void init() {
+	public void init(ServletConfig config) {
 		try {
+			
+			ServletContext context = config.getServletContext();
+			String dburl = context.getInitParameter("dburl");
+			String dbuser = context.getInitParameter("dbuser");
+			String dbpassword =context.getInitParameter("dbpassword");
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "root");
+			con = DriverManager.getConnection(dburl, dbuser, dbpassword);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -39,7 +46,6 @@ public class listUserServlet extends HttpServlet {
 		try(Statement statement = con.createStatement();
 			ResultSet rs = statement.executeQuery("select * from user;");) {
 			
-			 
 			while(rs.next()) {
 				
 				firstName = rs.getString(1);
@@ -50,27 +56,19 @@ public class listUserServlet extends HttpServlet {
 				out.print(lastName+" ");
 				out.print(emailId+" ");
 				out.println();
-				
 			} 
 		} catch (SQLException e) {
-
 			e.printStackTrace();
-
-		}
-			
+		}	
 	}
 	
-	public void destroy() {
-		
+	public void destroy() {		
 		try {
 			if(con != null ) {
 			con.close();
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
-}
-
+	}
 }

@@ -1,9 +1,10 @@
-package java.com.servlets;
+package com.loginservlets.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,11 +40,11 @@ public class LoginServlet extends HttpServlet {
 			
 			boolean result = preparedStatement.execute();
 			if(result)
-				resultSet = preparedStatement.getResult();
+				resultSet = preparedStatement.getResultSet();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-				
-
-
 	}
 
 	private boolean isValidInput(String username, boolean b) {
