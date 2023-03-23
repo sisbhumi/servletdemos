@@ -13,82 +13,101 @@ import javax.sql.DataSource;
 import com.studentweb.model.Student;
 
 public class StudentdataUtil {
-	
+
 	private DataSource datasource;
-	
+
 	public StudentdataUtil(DataSource datasource2) {
 		this.datasource = datasource2;
 	}
 
-	public List<Student> getStudents(){
-		
+	public List<Student> getStudents() {
+
 		List<Student> students = new ArrayList<>();
+
 		Connection con = null;
-		Statement stmt = null ;
+		Statement stmt = null;
 		ResultSet rs = null;
-		
+
 		try {
-			
+
 			con = this.datasource.getConnection();
 			stmt = con.createStatement();
 			ResultSet resultset = stmt.executeQuery("Select * from student order by id");
-			while(resultset.next()) {
+			while (resultset.next()) {
 				int id = resultset.getInt("id");
 				String fname = resultset.getString("first_name");
 				String lname = resultset.getString("last_name");
 				String email = resultset.getString("email");
-				Student student = new Student(id,fname,lname,email);
+				Student student = new Student(id, fname, lname, email);
 				students.add(student);
-				
+
 			}
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
-			close(con,stmt,rs);	
+		} finally {
+			close(con, stmt, rs);
 		}
-		
 		return students;
 	}
-	
+
 	private void close(Connection con, Statement stmt, ResultSet rs) {
 		try {
-			if(rs!=null) {
+			if (rs != null) {
 				rs.close();
 			}
-			
-			if(stmt != null) {
+
+			if (stmt != null) {
 				stmt.close();
 			}
-			
-			if(con != null) {
+
+			if (con != null) {
 				con.close();
 			}
-		}
-		catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
+	public void deleteStudent(int studentId) {
 
-	public void deleteStuentd(int studentId) {
-		// TODO Auto-generated method stub
 		Connection con = null;
 		PreparedStatement stmt = null;
-		
+
 		try {
-			
 			con = this.datasource.getConnection();
 			String sql = "delete from student where id = ?";
+			
 			stmt = con.prepareStatement(sql);
+			
 			stmt.setInt(1, studentId);
 			stmt.execute();
-		}catch (SQLException e) {
-			
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
-			close(con,stmt,null);	
-		}	
+
+		} finally {
+			close(con, stmt, null);
+		}
 	}
-	
-	
+
+	public void updateStudent(int studentId) {
+
+		Connection con = null;
+		PreparedStatement stmt = null;
+
+		try {
+			con = this.datasource.getConnection();
+			String sql = "update student set email = ? where id = ?";
+			stmt = con.prepareStatement(sql);
+			
+			stmt.setInt(1, studentId);
+			stmt.setString(2, email);
+			stmt.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+			close(con, stmt, null);
+		}
+	}
+
 }

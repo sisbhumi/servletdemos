@@ -35,7 +35,7 @@ public class DeleteStudentServlet extends HttpServlet {
 		String studentId = request.getParameter("studentId");
 		int id = Integer.parseInt(studentId);
 		
-		studentDataUtil.deleteStuentd(id);
+		studentDataUtil.deleteStudent(id);
 		request.setAttribute("student_list", studentDataUtil.getStudents());
 
 		RequestDispatcher d = request.getRequestDispatcher("/view_students.jsp");
