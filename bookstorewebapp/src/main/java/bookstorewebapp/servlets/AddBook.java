@@ -37,28 +37,6 @@ public class AddBook extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-//		Session session = HibernateUtil.getSessionfactory().openSession();
-//
-//		org.hibernate.Transaction transaction =  session.beginTransaction();
-//
-//		String name = request.getParameter("name");
-//		String price = request.getParameter("price");
-//		int b_price = Integer.parseInt(price);
-//		
-//		Book book = new Book(name, b_price);
-//		
-//		session.save(book);
-//		
-//		session.getTransaction().commit();
-//		transaction.commit();
-//		session.close();
-		
-//		request.setAttribute("book_list", bookList);
-//
-//		RequestDispatcher d = request.getRequestDispatcher("/addbook.jsp");
-//		d.include(request, response);
-		
-
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

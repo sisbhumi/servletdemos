@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -22,7 +23,8 @@ public class AddProduct extends HttpServlet {
        
 	private Connection con;
 	private PreparedStatement preparedstatement;
-    
+
+	@Resource(name = "jdbc/schooladmin")
 	public void init(ServletConfig config) {
 		try {
 			

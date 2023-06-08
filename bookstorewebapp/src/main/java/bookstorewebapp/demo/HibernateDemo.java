@@ -17,15 +17,7 @@ public class HibernateDemo {
 
 	private static void demo2() {
 		
-		Session session = HibernateUtil.getSessionfactory().openSession();
-		
-//		session.beginTransaction();
-//		
-//		Book book = new Book("The Epic Mahabharat", 350);
-//		
-//		session.save(book);
-//		
-//		session.getTransaction().commit();
+		Session session = HibernateUtil.getSessionfactory().openSession();	
 		
 		Query q = session.createQuery("from Book");
 //		book = session.get(Book.class, 1 );
